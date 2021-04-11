@@ -1,0 +1,22 @@
+{
+    "name": "ibra/magic_forms",
+    "description": "Build forms validate request and save in model in easy way",
+    "authors": [
+        {
+            "name": "ibra4",
+            "email": "ibra16@itc.hu.edu.jo"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ibra\\MagicForms\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ibra\\MagicForms\\IbraMagicFormsServiceProvider"
+            ]
+        }
+    }
+}
