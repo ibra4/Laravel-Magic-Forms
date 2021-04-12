@@ -13,7 +13,6 @@ class IbraMagicFormsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(MagicFormInterface::class, MagicForm::class);
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'magic_form');
     }
 

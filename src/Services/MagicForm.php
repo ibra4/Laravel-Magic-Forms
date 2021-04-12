@@ -7,21 +7,23 @@ use Ibra\MagicForms\MagicFormInterface;
 class MagicForm implements MagicFormInterface
 {
 
-    public string $action;
+    public $model;
 
-    public string $classes;
+    public $action;
 
-    public string $id;
+    public $classes;
 
-    public string $title;
+    public $id;
 
-    public string $layout = 'bootstrap';
+    public $title;
 
-    public string $method = 'POST';
+    public $layout = 'bootstrap';
 
-    public bool $ajax = false;
+    public $method = 'POST';
 
-    public array $fields = [];
+    public $ajax = false;
+
+    public $fields = [];
 
     public function add(string $fieldClass, array $options): MagicFormInterface
     {
