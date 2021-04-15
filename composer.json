@@ -10,16 +10,16 @@
     "autoload": {
         "psr-4": {
             "Ibra\\MagicForms\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Ibra\\MagicForms\\IbraMagicFormsServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "MagicFormDataManager": "Ibra\\MagicForms\\Facades\\MagicFormDataManager"
+            }
         }
     }
 }
