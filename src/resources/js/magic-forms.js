@@ -1,0 +1,1 @@
+console.info('Magic forms script loaded successfully');
