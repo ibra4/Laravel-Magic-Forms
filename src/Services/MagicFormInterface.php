@@ -1,10 +1,9 @@
 <?php
 
-namespace Ibra\MagicForms;
+namespace Ibra\MagicForms\Services;
 
 interface MagicFormInterface
 {
     public function render(): array;
 
-    public function add(string $fieldClass, array $options): self;
 }

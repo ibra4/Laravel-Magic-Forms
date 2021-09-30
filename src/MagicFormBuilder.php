@@ -5,7 +5,7 @@ namespace Ibra\MagicForms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class MagicFormBiulder
+class MagicFormBuilder
 {
     public function __construct()
     {

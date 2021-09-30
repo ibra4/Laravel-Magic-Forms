@@ -21,10 +21,7 @@ class IbraMagicFormsServiceProvider extends ServiceProvider
         );
 
         $this->publishFiles();
-        
-        $this->app->bind('magicformdatamanager', function () {
-            return new MagicFormDataManager;
-        });
+
     }
 
     /**

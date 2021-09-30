@@ -1,8 +1,6 @@
 <?php
 
-namespace Ibra\MagicForms;
-
-use Ibra\MagicForms\MagicFormInterface;
+namespace Ibra\MagicForms\Services;
 
 class MagicForm implements MagicFormInterface
 {
