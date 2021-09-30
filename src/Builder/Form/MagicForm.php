@@ -1,31 +1,70 @@
 <?php
 
-namespace Ibra\MagicForms\Services;
+namespace Ibra\MagicForms\Builder\Form;
 
-class MagicForm implements MagicFormInterface
+abstract class MagicForm implements MagicFormInterface
 {
+    /**
+     * Eelequent model instance.
+     *
+     * @var \Illuminate\Database\Eloquent\Model
+     */
     public $model;
-
+    
+    /**
+     * HTML form action attribute.
+     *
+     * @var string
+     */
     public $action;
-
+    
+    /**
+     * HTML classes attribute.
+     *
+     * @var string
+     */
     public $classes;
-
+    
+    /**
+     * HTML id attribute.
+     *
+     * @var mixed
+     */
     public $id;
-
+    
+    /**
+     * Title of the form.
+     *
+     * @var string
+     */
     public $title;
 
     /**
-     * UI Framework
+     * UI Framework (bootstrap | material_ui).
      *
-     * @note For now only bootstrap working
-     * @param string("bootstrap", "material") $layout
+     * @var string
      */
     public $layout = 'bootstrap';
-
+    
+    /**
+     * HTTP method.
+     *
+     * @var string
+     */
     public $method = 'POST';
-
+    
+    /**
+     * If true the form will be submitted by js.
+     *
+     * @var bool
+     */
     public $ajax = false;
-
+    
+    /**
+     * Form fields.
+     *
+     * @var FieldBase[]
+     */
     public $fields = [];
     
     /**
@@ -33,7 +72,7 @@ class MagicForm implements MagicFormInterface
      *
      * @param  string $fieldClass
      * @param  array $options
-     * @return MagicFormInterface
+     * @return self
      */
     public function add(string $fieldClass, array $options): MagicFormInterface
     {
@@ -46,7 +85,9 @@ class MagicForm implements MagicFormInterface
     }
     
     /**
-     * Make HTML form
+     * Makes a renderable array of the form with it's data.
+     * @TODO: Maybe it must return a view instead of array.
+     * @TODO: Maybe it's better to set $method / $action here.
      *
      * @return array
      */
@@ -65,16 +106,14 @@ class MagicForm implements MagicFormInterface
             'css' => $this->loadAssets('css'),
             'js' => $this->loadAssets('js')
         ];
-
-        
-        return $view->render();
     }
     
     /**
-     * Loads css / js files
+     * Loads css / js files.
+     * @TODO: Find a better way to load the assets.
      *
-     * @param string("css", "js") $type
-     * @return array
+     * @param string $type css | js.
+     * @return mixed
      */
     private function loadAssets($type)
     {
@@ -114,10 +153,11 @@ class MagicForm implements MagicFormInterface
     }
     
     /**
-     * Makes script or link HTML Elements
+     * Makes script or link HTML Elements.
+     * @TODO: Maybe will be removed.
      *
      * @param  string $src
-     * @param string("css", "js") $type
+     * @param string $type js | css
      * @return string
      */
     private function makeHTML($src, $type)
@@ -130,4 +170,9 @@ class MagicForm implements MagicFormInterface
 
         return "$html\n";
     }
+        
+    /**
+     * {@inheritDoc}
+     */
+    abstract public function build();
 }

@@ -6,6 +6,13 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FieldBase
 {
+    /**
+     * @TODO: Revamp.
+     *
+     * @param  mixed $options
+     * @param  mixed $fieldObject
+     * @return void
+     */
     public function buildOptions($options, $fieldObject)
     {
         $properties = \array_diff(array_keys(get_object_vars($fieldObject)), $fieldObject::UNSET_PROPERTIES);

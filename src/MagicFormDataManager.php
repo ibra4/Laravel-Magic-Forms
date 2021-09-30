@@ -2,8 +2,8 @@
 
 namespace Ibra\MagicForms;
 
+use Ibra\MagicForms\Builder\Form\MagicForm;
 use Illuminate\Http\Request;
-use Ibra\MagicForms\MagicForm;
 
 class MagicFormDataManager
 {

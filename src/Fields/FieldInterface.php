@@ -1,6 +1,6 @@
 <?php
 
-namespace Ibra\MagicForms\Interfaces;
+namespace Ibra\MagicForms\Fields;
 
 interface FieldInterface
 {
