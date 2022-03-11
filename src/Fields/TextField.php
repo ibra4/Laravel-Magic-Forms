@@ -4,9 +4,9 @@ namespace Ibra\MagicForms\Fields;
 
 class TextField extends FieldBase implements FieldInterface
 {
-    const REQUIRED_PROPERTIES = ['label', 'name'];
+    // const REQUIRED_PROPERTIES = ['label', 'name'];
 
-    const UNSET_PROPERTIES = ['position'];
+    // const UNSET_PROPERTIES = ['position'];
        
     // @TODO: Document all properties.
     
@@ -24,12 +24,12 @@ class TextField extends FieldBase implements FieldInterface
      */
     public $type = 'text';
     
-    /**
-     * name
-     *
-     * @var mixed
-     */
-    public $name;
+    // /**
+    //  * name
+    //  *
+    //  * @var mixed
+    //  */
+    // public $name;
     
     /**
      * default
@@ -38,40 +38,40 @@ class TextField extends FieldBase implements FieldInterface
      */
     public $default;
     
-    /**
-     * label
-     *
-     * @var mixed
-     */
-    public $label;
+    // /**
+    //  * label
+    //  *
+    //  * @var mixed
+    //  */
+    // public $label;
     
-    /**
-     * description
-     *
-     * @var mixed
-     */
-    public $description;
+    // /**
+    //  * description
+    //  *
+    //  * @var mixed
+    //  */
+    // public $description;
     
-    /**
-     * id
-     *
-     * @var mixed
-     */
-    public $id;
+    // /**
+    //  * id
+    //  *
+    //  * @var mixed
+    //  */
+    // public $id;
     
-    /**
-     * classes
-     *
-     * @var string
-     */
-    public $classes = '';
+    // /**
+    //  * classes
+    //  *
+    //  * @var string
+    //  */
+    // public $classes = '';
     
-    /**
-     * wrapper_classes
-     *
-     * @var string
-     */
-    public $wrapper_classes = '';
+    // /**
+    //  * wrapper_classes
+    //  *
+    //  * @var string
+    //  */
+    // public $wrapper_classes = '';
     
     /**
      * placeholder
@@ -80,12 +80,12 @@ class TextField extends FieldBase implements FieldInterface
      */
     public $placeholder;
     
-    /**
-     * required
-     *
-     * @var bool
-     */
-    public $required = false;
+    // /**
+    //  * required
+    //  *
+    //  * @var bool
+    //  */
+    // public $required = false;
     
     /**
      * pattern
@@ -101,19 +101,19 @@ class TextField extends FieldBase implements FieldInterface
      */
     public $readonly;
     
-    /**
-     * disabled
-     *
-     * @var mixed
-     */
-    public $disabled;
+    // /**
+    //  * disabled
+    //  *
+    //  * @var mixed
+    //  */
+    // public $disabled;
     
-    /**
-     * rules
-     *
-     * @var mixed
-     */
-    public $rules;
+    // /**
+    //  * rules
+    //  *
+    //  * @var mixed
+    //  */
+    // public $rules;
         
     /**
      * ignored
@@ -136,12 +136,12 @@ class TextField extends FieldBase implements FieldInterface
     /**
      * @TODO: Try to build the field from inside it's class.
      *
-     * @param  mixed $options
+     * @param  array $options
      * @return FieldInterface
      */
     public function build(array $options): FieldInterface
     {
-        $this->buildOptions($options, $this);
+        $this->buildProperties($options, $this);
 
         return $this;
     }

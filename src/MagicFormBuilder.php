@@ -2,13 +2,14 @@
 
 namespace Ibra\MagicForms;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class MagicFormBuilder
 {
     // @TODO: Maybe we need additional logic / layers in this class;
-        
+
     /**
      * If we need to load services.
      *
@@ -17,7 +18,7 @@ class MagicFormBuilder
     public function __construct()
     {
     }
-    
+
     /**
      * Creates a new Form Object.
      *
@@ -35,17 +36,18 @@ class MagicFormBuilder
             $form = new $className();
             return $form->build($options);
         } catch (\Throwable $th) {
-            throw $th->getMessage();
+            throw new Exception($th->getMessage());
         }
     }
 
     public function get($className)
     {
+        /** @var \Ibra\MagicForms\Builder\Form\MagicForm $form */
         $form = new $className();
         $this->form = $form->build();
         return $this;
     }
-    
+
     /**
      * Validates the request.
      * 

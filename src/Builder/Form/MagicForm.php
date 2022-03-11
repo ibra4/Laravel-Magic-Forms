@@ -2,6 +2,8 @@
 
 namespace Ibra\MagicForms\Builder\Form;
 
+use Ibra\MagicForms\Fields\FieldBase;
+
 abstract class MagicForm implements MagicFormInterface
 {
     /**
@@ -72,16 +74,20 @@ abstract class MagicForm implements MagicFormInterface
      *
      * @param  string $fieldClass
      * @param  array $options
-     * @return self
+     * @return \Ibra\MagicForms\Fields\FieldBase
      */
-    public function add(string $fieldClass, array $options): MagicFormInterface
+    public function add(string $fieldClass, array $options): FieldBase
     {
         $field = new $fieldClass(count($this->fields));
-        $field->build($options);
+        $field->build($options, $this->model);
+
+        if ($this->model && isset($this->model->{$field->name}) && $field->value === '') {
+            $field->value = $this->model->{$field->name};
+        }
 
         $this->fields[] = $field;
 
-        return $this;
+        return $field;
     }
     
     /**
@@ -171,8 +177,8 @@ abstract class MagicForm implements MagicFormInterface
         return "$html\n";
     }
         
-    /**
-     * {@inheritDoc}
-     */
-    abstract public function build();
+    // /**
+    //  * {@inheritDoc}
+    //  */
+    // abstract public function build();
 }

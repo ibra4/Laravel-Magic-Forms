@@ -7,26 +7,112 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class FieldBase
 {
     /**
+     * id
+     *
+     * @var mixed
+     */
+    public $id = "";
+
+    /**
+     * name
+     *
+     * @var string
+     */
+    public $name;
+
+    /**
+     * label
+     *
+     * @var string
+     */
+    public $label;
+
+    /**
+     * description
+     *
+     * @var string
+     */
+    public $description;
+
+    /**
+     * classes
+     *
+     * @var string
+     */
+    public $classes = '';
+
+    /**
+     * wrapper_classes
+     *
+     * @var string
+     */
+    public $wrapper_classes = '';
+
+    /**
+     * required
+     *
+     * @var bool
+     */
+    public $required = false;
+
+    /**
+     * disabled
+     *
+     * @var mixed
+     */
+    public $disabled;
+
+    /**
+     * value
+     *
+     * @var mixed
+     */
+    public $value = "";
+
+    /**
+     * rules
+     *
+     * @var mixed
+     */
+    public $rules;
+
+    /**
      * @TODO: Revamp.
      *
      * @param  mixed $options
      * @param  mixed $fieldObject
      * @return void
      */
-    public function buildOptions($options, $fieldObject)
+    public function buildProperties($options, $fieldObject)
     {
-        $properties = \array_diff(array_keys(get_object_vars($fieldObject)), $fieldObject::UNSET_PROPERTIES);
-
-        foreach ($fieldObject::REQUIRED_PROPERTIES as $required) {
-            if (!array_key_exists($required, $options)) {
-                throw new BadRequestHttpException(sprintf("missing required option {%s} for flied \"%s\" at position {%d}", $required, $fieldObject->type, $this->position));
-            }
+        foreach ($options as $property => $value) {
+            $fieldObject->$property = $value;
         }
+        $this->setOldValue();
+    }
 
-        foreach ($properties as $property) {
-            if (array_key_exists($property, $options)) {
-                $fieldObject->$property = $options[$property];
-            }
+    /**
+     * setOldValue
+     *   Sets the field value.
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    protected function setOldValue($old = true)
+    {
+        if ($old && old($this->name)) {
+            $this->value = old($this->name);
         }
+    }
+
+    /**
+     * getValue
+     *   Gets the field value.
+     *
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }
