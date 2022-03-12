@@ -1,4 +1,3 @@
-{{-- {{ dd($field) }} --}}
 <div @isset($field->id) id="field_{{ $field->id }}_wrapper" @endisset
     class="form-group{{ !empty($field->wrapper_classes) ? ' ' . $field->wrapper_classes : '' }}">
     <label for="{{ $field->id }}">{{ $field->label }}</label>
