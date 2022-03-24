@@ -7,9 +7,9 @@ class TextField extends FieldBase implements FieldInterface
     // const REQUIRED_PROPERTIES = ['label', 'name'];
 
     // const UNSET_PROPERTIES = ['position'];
-       
+
     // @TODO: Document all properties.
-    
+
     /**
      * view_name
      *
@@ -23,105 +23,44 @@ class TextField extends FieldBase implements FieldInterface
      * @var string
      */
     public $type = 'text';
-    
-    // /**
-    //  * name
-    //  *
-    //  * @var mixed
-    //  */
-    // public $name;
-    
+
     /**
-     * default
+     * additional_html_attributes
      *
-     * @var mixed
+     * @var array
      */
-    public $default;
-    
-    // /**
-    //  * label
-    //  *
-    //  * @var mixed
-    //  */
-    // public $label;
-    
-    // /**
-    //  * description
-    //  *
-    //  * @var mixed
-    //  */
-    // public $description;
-    
-    // /**
-    //  * id
-    //  *
-    //  * @var mixed
-    //  */
-    // public $id;
-    
-    // /**
-    //  * classes
-    //  *
-    //  * @var string
-    //  */
-    // public $classes = '';
-    
-    // /**
-    //  * wrapper_classes
-    //  *
-    //  * @var string
-    //  */
-    // public $wrapper_classes = '';
-    
+    public $additional_html_attributes = ['placeholder'];
+
+    /**
+     * attributes
+     *
+     * @var array
+     */
+    public $attributes = [
+        'class' => 'form-control'
+    ];
+
     /**
      * placeholder
      *
      * @var mixed
      */
     public $placeholder;
-    
-    // /**
-    //  * required
-    //  *
-    //  * @var bool
-    //  */
-    // public $required = false;
-    
+
     /**
      * pattern
      *
      * @var mixed
      */
     public $pattern;
-    
-    /**
-     * readonly
-     *
-     * @var mixed
-     */
-    public $readonly;
-    
-    // /**
-    //  * disabled
-    //  *
-    //  * @var mixed
-    //  */
-    // public $disabled;
-    
-    // /**
-    //  * rules
-    //  *
-    //  * @var mixed
-    //  */
-    // public $rules;
-        
+
     /**
      * ignored
      *
      * @var mixed
      */
     public $ignored;
-    
+
     /**
      * Create a new TextField model instance.
      *
@@ -132,7 +71,7 @@ class TextField extends FieldBase implements FieldInterface
     {
         $this->position = $position;
     }
-    
+
     /**
      * @TODO: Try to build the field from inside it's class.
      *
@@ -141,8 +80,12 @@ class TextField extends FieldBase implements FieldInterface
      */
     public function build(array $options): FieldInterface
     {
-        $this->buildProperties($options, $this);
+        $this->buildHtmlAttributes($options, $this);
 
         return $this;
+    }
+
+    private function renderAttributes()
+    {
     }
 }

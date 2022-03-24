@@ -2,16 +2,32 @@
 
 namespace Ibra\MagicForms\Fields;
 
+use Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FieldBase
 {
+    
+    /**
+     * base_html_attributes
+     *
+     * @var array
+     */
+    public $base_html_attributes = ['id', 'class', 'name', 'required', 'disabled'];
+    
+    /**
+     * all_attributes
+     *
+     * @var array
+     */
+    public $all_html_attributes;
+
     /**
      * id
      *
-     * @var mixed
+     * @var string|integer
      */
-    public $id = "";
+    public $id;
 
     /**
      * name
@@ -26,13 +42,6 @@ class FieldBase
      * @var string
      */
     public $label;
-
-    /**
-     * description
-     *
-     * @var string
-     */
-    public $description;
 
     /**
      * classes
@@ -83,10 +92,12 @@ class FieldBase
      * @param  mixed $fieldObject
      * @return void
      */
-    public function buildProperties($options, $fieldObject)
+    public function buildHtmlAttributes($options, $fieldObject)
     {
-        foreach ($options as $property => $value) {
-            $fieldObject->$property = $value;
+        $this->all_html_attributes = array_merge($this->base_html_attributes, $this->additional_html_attributes);
+        foreach ($options as $attr => $value) {
+            $fieldObject->$attr = $value;
+            $this->setHtmlAttribute($attr, $value);
         }
         $this->setOldValue();
     }
@@ -114,5 +125,24 @@ class FieldBase
     public function getValue()
     {
         return $this->value;
+    }
+    
+    /**
+     * setHtmlAttribute
+     *
+     * @param  string $attr
+     * @param  mixed $value
+     * @return void
+     */
+    public function setHtmlAttribute($attr, $value) {
+        if ($attr === 'class') {
+            $this->attributes['class'] .= " $value";
+        } elseif (is_numeric($attr) && in_array($value, $this->all_html_attributes)) {
+            $this->attributes[$value] = true;
+        } elseif (in_array($attr, $this->all_html_attributes)) {
+                $this->attributes[$attr] = $value;
+        } else {
+            throw new Exception("Invalid Attribute $attr");
+        }
     }
 }

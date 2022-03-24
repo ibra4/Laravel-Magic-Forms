@@ -58,12 +58,12 @@ class MagicFormBuilder
      */
     public function simpleValidate(Request $request)
     {
-        $validateArr = [];
-        foreach ($this->form->fields as $field) {
-            if ($field->rules) {
-                $validateArr[$field->name] = $field->rules;
-            }
-        }
+        $validateArr = $this->form->rules();
+        // foreach ($this->form->fields as $field) {
+        //     if ($field->rules) {
+        //         $validateArr[$field->name] = $field->rules;
+        //     }
+        // }
         $validator = Validator::make($request->all(), $validateArr);
         return $validator;
     }
