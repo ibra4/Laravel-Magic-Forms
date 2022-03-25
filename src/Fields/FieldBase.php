@@ -7,14 +7,14 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FieldBase
 {
-    
+
     /**
      * base_html_attributes
      *
      * @var array
      */
     public $base_html_attributes = ['id', 'class', 'name', 'required', 'disabled'];
-    
+
     /**
      * all_attributes
      *
@@ -86,6 +86,16 @@ class FieldBase
     public $rules;
 
     /**
+     * Constructor.
+     *
+     * @param  mixed $position
+     * @return void
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * @TODO: Revamp.
      *
      * @param  mixed $options
@@ -126,7 +136,7 @@ class FieldBase
     {
         return $this->value;
     }
-    
+
     /**
      * setHtmlAttribute
      *
@@ -134,15 +144,21 @@ class FieldBase
      * @param  mixed $value
      * @return void
      */
-    public function setHtmlAttribute($attr, $value) {
+    public function setHtmlAttribute($attr, $value)
+    {
         if ($attr === 'class') {
             $this->attributes['class'] .= " $value";
         } elseif (is_numeric($attr) && in_array($value, $this->all_html_attributes)) {
             $this->attributes[$value] = true;
         } elseif (in_array($attr, $this->all_html_attributes)) {
-                $this->attributes[$attr] = $value;
+            $this->attributes[$attr] = $value;
         } else {
             throw new Exception("Invalid Attribute $attr");
         }
+    }
+
+    public function render($wrapper = true)
+    {
+        return view('magic_form::fields.' . $this->view_name, ['field' => $this]);
     }
 }

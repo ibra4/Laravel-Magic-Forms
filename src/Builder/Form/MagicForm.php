@@ -42,13 +42,6 @@ abstract class MagicForm implements MagicFormInterface
     public $title;
 
     /**
-     * UI Framework (bootstrap | material_ui).
-     *
-     * @var string
-     */
-    public $layout = 'bootstrap';
-
-    /**
      * HTTP method.
      *
      * @var string
@@ -80,14 +73,14 @@ abstract class MagicForm implements MagicFormInterface
     public function add(string $fieldClass, array $options): FieldBase
     {
         /** @var FieldBase $fieldClass */
-        $field = new $fieldClass(count($this->fields));
+        $field = new $fieldClass();
         $field->build($options, $this->model);
 
         if ($this->model && isset($this->model->{$field->name}) && $field->value === '') {
             $field->value = $this->model->{$field->name};
         }
 
-        $this->fields[] = $field;
+        $this->fields[$field->name] = $field;
 
         return $field;
     }
@@ -107,8 +100,33 @@ abstract class MagicForm implements MagicFormInterface
         $method = in_array($this->method, $post_methods) ? 'POST' : $this->method;
         $method_field = in_array($this->method, $post_methods) ? $this->method : null;
 
-        return view('magic_form::forms.' . $this->layout . '.index')
+        return view('magic_form::forms.index')
             ->with(compact('form', 'method', 'method_field'))
             ->render();
+    }
+
+    /**
+     *
+     */
+    public function begin()
+    {
+        $post_methods = ['PATCH', 'PUT', 'DELETE'];
+
+        $form = $this;
+        $method = in_array($this->method, $post_methods) ? 'POST' : $this->method;
+        $method_field = in_array($this->method, $post_methods) ? $this->method : null;
+
+        return view('magic_form::forms.begin')
+            ->with(compact('form', 'method', 'method_field'));
+    }
+
+    public function end()
+    {
+        return view('magic_form::forms.end');
+    }
+
+    public function submit()
+    {
+        return view('magic_form::forms.submit');
     }
 }

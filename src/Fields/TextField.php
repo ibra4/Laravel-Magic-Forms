@@ -62,17 +62,6 @@ class TextField extends FieldBase implements FieldInterface
     public $ignored;
 
     /**
-     * Create a new TextField model instance.
-     *
-     * @param  mixed $position
-     * @return void
-     */
-    public function __construct($position)
-    {
-        $this->position = $position;
-    }
-
-    /**
      * @TODO: Try to build the field from inside it's class.
      *
      * @param  array $options
