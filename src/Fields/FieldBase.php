@@ -3,7 +3,6 @@
 namespace Ibra\MagicForms\Fields;
 
 use Exception;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FieldBase
 {
@@ -16,62 +15,6 @@ class FieldBase
     public $base_html_attributes = ['id', 'class', 'name', 'required', 'disabled'];
 
     /**
-     * all_attributes
-     *
-     * @var array
-     */
-    public $all_html_attributes;
-
-    /**
-     * id
-     *
-     * @var string|integer
-     */
-    public $id;
-
-    /**
-     * name
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * label
-     *
-     * @var string
-     */
-    public $label;
-
-    /**
-     * classes
-     *
-     * @var string
-     */
-    public $classes = '';
-
-    /**
-     * wrapper_classes
-     *
-     * @var string
-     */
-    public $wrapper_classes = '';
-
-    /**
-     * required
-     *
-     * @var bool
-     */
-    public $required = false;
-
-    /**
-     * disabled
-     *
-     * @var mixed
-     */
-    public $disabled;
-
-    /**
      * value
      *
      * @var mixed
@@ -79,20 +22,20 @@ class FieldBase
     public $value = "";
 
     /**
-     * rules
+     * @TODO: Try to build the field from inside it's class.
      *
-     * @var mixed
+     * @param  array $options
+     * @return FieldBase
      */
-    public $rules;
-
-    /**
-     * Constructor.
-     *
-     * @param  mixed $position
-     * @return void
-     */
-    public function __construct()
+    public function build(array $options, $model = null): FieldBase
     {
+        $this->buildHtmlAttributes($options, $this);
+
+        if ($model && isset($model->{$this->name}) && $this->value === '') {
+            $this->value = $model->{$this->name};
+        }
+
+        return $this;
     }
 
     /**
@@ -105,8 +48,8 @@ class FieldBase
     public function buildHtmlAttributes($options, $fieldObject)
     {
         $this->all_html_attributes = array_merge($this->base_html_attributes, $this->additional_html_attributes);
+        $fieldObject->name = $options['name'];
         foreach ($options as $attr => $value) {
-            $fieldObject->$attr = $value;
             $this->setHtmlAttribute($attr, $value);
         }
         $this->setOldValue();
@@ -146,9 +89,7 @@ class FieldBase
      */
     public function setHtmlAttribute($attr, $value)
     {
-        if ($attr === 'class') {
-            $this->attributes['class'] .= " $value";
-        } elseif (is_numeric($attr) && in_array($value, $this->all_html_attributes)) {
+        if (is_numeric($attr) && in_array($value, $this->all_html_attributes)) {
             $this->attributes[$value] = true;
         } elseif (in_array($attr, $this->all_html_attributes)) {
             $this->attributes[$attr] = $value;
@@ -157,8 +98,9 @@ class FieldBase
         }
     }
 
-    public function render($wrapper = true)
+    public function render($wrapper = false)
     {
-        return view('magic_form::fields.' . $this->view_name, ['field' => $this]);
+        $fieldView = view("magic_form::fields.$this->view_name", ['field' => $this]);
+        return $fieldView;
     }
 }

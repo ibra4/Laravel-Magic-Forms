@@ -4,12 +4,6 @@ namespace Ibra\MagicForms\Fields;
 
 class TextField extends FieldBase implements FieldInterface
 {
-    // const REQUIRED_PROPERTIES = ['label', 'name'];
-
-    // const UNSET_PROPERTIES = ['position'];
-
-    // @TODO: Document all properties.
-
     /**
      * view_name
      *
@@ -30,51 +24,4 @@ class TextField extends FieldBase implements FieldInterface
      * @var array
      */
     public $additional_html_attributes = ['placeholder'];
-
-    /**
-     * attributes
-     *
-     * @var array
-     */
-    public $attributes = [
-        'class' => 'form-control'
-    ];
-
-    /**
-     * placeholder
-     *
-     * @var mixed
-     */
-    public $placeholder;
-
-    /**
-     * pattern
-     *
-     * @var mixed
-     */
-    public $pattern;
-
-    /**
-     * ignored
-     *
-     * @var mixed
-     */
-    public $ignored;
-
-    /**
-     * @TODO: Try to build the field from inside it's class.
-     *
-     * @param  array $options
-     * @return FieldInterface
-     */
-    public function build(array $options): FieldInterface
-    {
-        $this->buildHtmlAttributes($options, $this);
-
-        return $this;
-    }
-
-    private function renderAttributes()
-    {
-    }
 }

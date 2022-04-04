@@ -1,6 +1,3 @@
-@isset($form->title)
-    <h3>{{ $form->title }}</h3>
-@endisset
 <form novalidate action="{{ $form->action }}" method="{{ $form->method }}"
     @isset($form->classes) class="{{ $form->classes }}" @endisset
     @isset($form->id) id="{{ $form->id }}" @endisset>

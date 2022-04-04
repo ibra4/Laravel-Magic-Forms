@@ -35,13 +35,6 @@ abstract class MagicForm implements MagicFormInterface
     public $id;
 
     /**
-     * Title of the form.
-     *
-     * @var string
-     */
-    public $title;
-
-    /**
      * HTTP method.
      *
      * @var string
@@ -65,20 +58,16 @@ abstract class MagicForm implements MagicFormInterface
     /**
      * Add field to the form.
      *
-     * @param  string $fieldClass
-     * @param  array $options
+     * @param string $fieldClass
+     * @param array $options
      *   HTML Attributes as an array.
      * @return \Ibra\MagicForms\Fields\FieldBase
      */
     public function add(string $fieldClass, array $options): FieldBase
     {
-        /** @var FieldBase $fieldClass */
+        /** @var FieldBase $field */
         $field = new $fieldClass();
         $field->build($options, $this->model);
-
-        if ($this->model && isset($this->model->{$field->name}) && $field->value === '') {
-            $field->value = $this->model->{$field->name};
-        }
 
         $this->fields[$field->name] = $field;
 
@@ -86,13 +75,11 @@ abstract class MagicForm implements MagicFormInterface
     }
 
     /**
-     * Makes a renderable array of the form with it's data.
-     * @TODO: Maybe it must return a view instead of array.
-     * @TODO: Maybe it's better to set $method / $action here.
+     * Makes a form view.
      *
-     * @return array|string
+     * @return string
      */
-    public function render()
+    public function render($closeTag = false)
     {
         $post_methods = ['PATCH', 'PUT', 'DELETE'];
 
@@ -100,31 +87,36 @@ abstract class MagicForm implements MagicFormInterface
         $method = in_array($this->method, $post_methods) ? 'POST' : $this->method;
         $method_field = in_array($this->method, $post_methods) ? $this->method : null;
 
-        return view('magic_form::forms.index')
-            ->with(compact('form', 'method', 'method_field'))
-            ->render();
-    }
-
-    /**
-     *
-     */
-    public function begin()
-    {
-        $post_methods = ['PATCH', 'PUT', 'DELETE'];
-
-        $form = $this;
-        $method = in_array($this->method, $post_methods) ? 'POST' : $this->method;
-        $method_field = in_array($this->method, $post_methods) ? $this->method : null;
-
-        return view('magic_form::forms.begin')
+        $viewName = $closeTag ? "begin" : "index";
+        return view("magic_form::forms.$viewName")
             ->with(compact('form', 'method', 'method_field'));
     }
 
+    /**
+     * Makes a form view without close tag </form>.
+     *
+     * @return string
+     */
+    public function begin()
+    {
+        return $this->render(true);
+    }
+    
+    /**
+     * Makes a close tag </form>
+     *
+     * @return string
+     */
     public function end()
     {
         return view('magic_form::forms.end');
     }
-
+    
+    /**
+     * Makes a submit button
+     *
+     * @return string
+     */
     public function submit()
     {
         return view('magic_form::forms.submit');
