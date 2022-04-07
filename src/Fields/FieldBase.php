@@ -21,6 +21,8 @@ class FieldBase
      */
     public $value = "";
 
+    public $parameters = [];
+
     /**
      * @TODO: Try to build the field from inside it's class.
      *
@@ -38,8 +40,14 @@ class FieldBase
         return $this;
     }
 
+    public function setOptions($params)
+    {
+        foreach ($params as $paramKey => $paramValue) {
+            $this->parameters[$paramKey] = $paramValue;
+        }
+    }
+
     /**
-     * @TODO: Revamp.
      *
      * @param  mixed $options
      * @param  mixed $fieldObject

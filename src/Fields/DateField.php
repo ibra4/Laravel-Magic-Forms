@@ -2,8 +2,12 @@
 
 namespace Ibra\MagicForms\Fields;
 
-use Ibra\MagicForms\Interfaces\FieldInterface;
-
-class DateField implements FieldInterface
+class DateField extends FieldBase implements FieldInterface
 {
+    /**
+     * view_name
+     *
+     * @var string
+     */
+    public $view_name = 'date_field';
 }

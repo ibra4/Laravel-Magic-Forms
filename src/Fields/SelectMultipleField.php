@@ -2,8 +2,19 @@
 
 namespace Ibra\MagicForms\Fields;
 
-use Ibra\MagicForms\Interfaces\FieldInterface;
-
-class SelectMultipleField implements FieldInterface
+class SelectMultipleField extends FieldBase implements FieldInterface
 {
+    /**
+     * additional_html_attributes
+     *
+     * @var array
+     */
+    public $additional_html_attributes = ['defaultvalue'];
+
+    /**
+     * view_name
+     *
+     * @var string
+     */
+    public $view_name = 'select_multiple_field';
 }

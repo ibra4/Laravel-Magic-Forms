@@ -2,11 +2,8 @@
 
 namespace Ibra\MagicForms\Builder\Form;
 
-use Ibra\MagicForms\Fields\FieldBase;
-
 interface MagicFormInterface
 {
-
     /**
      * Builds a form.
      *

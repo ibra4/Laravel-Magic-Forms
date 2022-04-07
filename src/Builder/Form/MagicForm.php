@@ -59,15 +59,16 @@ abstract class MagicForm implements MagicFormInterface
      * Add field to the form.
      *
      * @param string $fieldClass
-     * @param array $options
+     * @param array $html_attributes
      *   HTML Attributes as an array.
      * @return \Ibra\MagicForms\Fields\FieldBase
      */
-    public function add(string $fieldClass, array $options): FieldBase
+    public function add(string $fieldClass, array $html_attributes, array $params = []): FieldBase
     {
         /** @var FieldBase $field */
         $field = new $fieldClass();
-        $field->build($options, $this->model);
+        $field->build($html_attributes, $this->model);
+        $field->setOptions($params);
 
         $this->fields[$field->name] = $field;
 
