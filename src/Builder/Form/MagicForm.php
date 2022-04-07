@@ -4,7 +4,7 @@ namespace Ibra\MagicForms\Builder\Form;
 
 use Ibra\MagicForms\Fields\FieldBase;
 
-abstract class MagicForm implements MagicFormInterface
+class MagicForm
 {
     /**
      * Eelequent model instance.

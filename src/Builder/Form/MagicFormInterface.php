@@ -5,7 +5,7 @@ namespace Ibra\MagicForms\Builder\Form;
 interface MagicFormInterface
 {
     /**
-     * Builds a form.
+     * Add fields and Set Form settings.
      *
      * @return self
      */
@@ -17,4 +17,11 @@ interface MagicFormInterface
      * @return array
      */
     public function rules(): array;
+
+    /**
+     * Form Submit Actions.
+     * 
+     * @return array
+     */
+    public function action(): string;
 }
