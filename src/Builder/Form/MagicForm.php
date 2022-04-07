@@ -42,6 +42,20 @@ abstract class MagicForm implements MagicFormInterface
     public $method = 'POST';
 
     /**
+     * HTML HTTP method.
+     *
+     * @var string
+     */
+    public $html_method;
+
+    /**
+     * HTML HTTP method field.
+     *
+     * @var string
+     */
+    public $method_field = null;
+
+    /**
      * If true the form will be submitted by js.
      *
      * @var bool
@@ -84,13 +98,11 @@ abstract class MagicForm implements MagicFormInterface
     {
         $post_methods = ['PATCH', 'PUT', 'DELETE'];
 
-        $form = $this;
-        $method = in_array($this->method, $post_methods) ? 'POST' : $this->method;
-        $method_field = in_array($this->method, $post_methods) ? $this->method : null;
+        $this->method_field = in_array($this->method, $post_methods) ? $this->method : null;
+        $this->html_method = in_array($this->method, $post_methods) ? 'POST' : $this->method;
 
         $viewName = $closeTag ? "begin" : "index";
-        return view("magic_form::forms.$viewName")
-            ->with(compact('form', 'method', 'method_field'));
+        return view("magic_form::forms.$viewName")->with('form', $this);
     }
 
     /**
@@ -102,7 +114,7 @@ abstract class MagicForm implements MagicFormInterface
     {
         return $this->render(true);
     }
-    
+
     /**
      * Makes a close tag </form>
      *
@@ -112,7 +124,7 @@ abstract class MagicForm implements MagicFormInterface
     {
         return view('magic_form::forms.end');
     }
-    
+
     /**
      * Makes a submit button
      *

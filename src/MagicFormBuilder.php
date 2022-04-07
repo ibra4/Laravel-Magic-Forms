@@ -20,10 +20,10 @@ class MagicFormBuilder
     }
 
     /**
-     * Creates a new Form Object.
+     * Creates a new Form Object for rendering.
      *
      * @param  string $className.
-     *   The Field class name e.g. TextField::class.
+     *   The Form class name.
      * @param  array $options.
      *
      * @return \Ibra\MagicForms\Builder\Form\MagicForm
@@ -34,12 +34,20 @@ class MagicFormBuilder
         try {
             /** @var \Ibra\MagicForms\Builder\Form\MagicForm $form */
             $form = new $className();
+            $form->action = $form->action();
             return $form->build($options);
         } catch (\Throwable $th) {
             throw new Exception($th->getMessage());
         }
     }
 
+    /**
+     * Creates a new Form Object for data managment.
+     *
+     * @param  string $className.
+     *   The Form class name.
+     * @return self
+     */
     public function get($className)
     {
         /** @var \Ibra\MagicForms\Builder\Form\MagicForm $form */
