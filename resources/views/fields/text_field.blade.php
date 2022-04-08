@@ -6,7 +6,7 @@
         @else
         {{ $attr_key }}="{{ $attr_val }}" 
         @endif @endforeach
-        value="{{ $field->value }}">
+        value="{{ old($field->name, $field->value) }}">
 </div>
 @error($field->attributes['name'])
     <small class="text-danger">{{ $message }}</small>

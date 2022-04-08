@@ -2,10 +2,13 @@
 
 namespace Ibra\MagicForms\Builder\Form;
 
-use Ibra\MagicForms\Fields\FieldBase;
+use Exception;
+use Ibra\MagicForms\Factory\Field\FieldBuilder;
 
 class MagicForm
 {
+    use MagicFormRenderer;
+
     /**
      * Eelequent model instance.
      *
@@ -70,68 +73,31 @@ class MagicForm
     public $fields = [];
 
     /**
-     * Add field to the form.
+     * fieldBuilder
      *
-     * @param string $fieldClass
-     * @param array $html_attributes
-     *   HTML Attributes as an array.
-     * @return \Ibra\MagicForms\Fields\FieldBase
+     * @var \Ibra\MagicForms\Factory\Field\FieldBuilder
      */
-    public function add(string $fieldClass, array $html_attributes, array $params = []): FieldBase
-    {
-        /** @var FieldBase $field */
-        $field = new $fieldClass();
-        $field->build($html_attributes, $this->model);
-        $field->setOptions($params);
+    private $fieldBuilder;
 
+    /**
+     * constructor
+     *
+     * @param  \Ibra\MagicForms\Factory\Field\FieldBuilder $fieldBuilder
+     * @return void
+     */
+    public function __construct(FieldBuilder $fieldBuilder)
+    {
+        $this->fieldBuilder = $fieldBuilder;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function add(string $fieldClass, array $html_attributes, array $params = [])
+    {
+        $field = $this->fieldBuilder->makeField($fieldClass, $html_attributes, $params, $this->model);
         $this->fields[$field->name] = $field;
 
         return $field;
-    }
-
-    /**
-     * Makes a form view.
-     *
-     * @return string
-     */
-    public function render($closeTag = false)
-    {
-        $post_methods = ['PATCH', 'PUT', 'DELETE'];
-
-        $this->method_field = in_array($this->method, $post_methods) ? $this->method : null;
-        $this->html_method = in_array($this->method, $post_methods) ? 'POST' : $this->method;
-
-        $viewName = $closeTag ? "begin" : "index";
-        return view("magic_form::forms.$viewName")->with('form', $this);
-    }
-
-    /**
-     * Makes a form view without close tag </form>.
-     *
-     * @return string
-     */
-    public function begin()
-    {
-        return $this->render(true);
-    }
-
-    /**
-     * Makes a close tag </form>
-     *
-     * @return string
-     */
-    public function end()
-    {
-        return view('magic_form::forms.end');
-    }
-
-    /**
-     * Makes a submit button
-     *
-     * @return string
-     */
-    public function submit()
-    {
-        return view('magic_form::forms.submit');
     }
 }

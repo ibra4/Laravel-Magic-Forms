@@ -29,13 +29,10 @@ class FieldBase
      * @param  array $options
      * @return FieldBase
      */
-    public function build(array $options, $model = null): FieldBase
+    public function buildRenderable(array $options, $params = null): FieldBase
     {
         $this->buildHtmlAttributes($options, $this);
-
-        if ($model && isset($model->{$this->name}) && $this->value === '') {
-            $this->value = $model->{$this->name};
-        }
+        $this->setOptions($params);
 
         return $this;
     }
@@ -59,21 +56,6 @@ class FieldBase
         $fieldObject->name = $options['name'];
         foreach ($options as $attr => $value) {
             $this->setHtmlAttribute($attr, $value);
-        }
-        $this->setOldValue();
-    }
-
-    /**
-     * setOldValue
-     *   Sets the field value.
-     *
-     * @param  mixed $value
-     * @return void
-     */
-    protected function setOldValue($old = true)
-    {
-        if ($old && old($this->name)) {
-            $this->value = old($this->name);
         }
     }
 
@@ -106,7 +88,7 @@ class FieldBase
         }
     }
 
-    public function render($wrapper = false)
+    public function render()
     {
         $fieldView = view("magic_form::fields.$this->view_name", ['field' => $this]);
         return $fieldView;

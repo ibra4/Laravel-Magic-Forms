@@ -2,7 +2,7 @@
 
 namespace Ibra\MagicForms\Fields;
 
-class DateTimeField extends FieldBase implements FieldInterface
+class DateTimeField extends FieldBase
 {
     /**
      * view_name

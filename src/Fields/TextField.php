@@ -2,7 +2,7 @@
 
 namespace Ibra\MagicForms\Fields;
 
-class TextField extends FieldBase implements FieldInterface
+class TextField extends FieldBase
 {
     /**
      * view_name

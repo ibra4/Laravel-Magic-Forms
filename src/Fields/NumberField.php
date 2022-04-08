@@ -2,7 +2,7 @@
 
 namespace Ibra\MagicForms\Fields;
 
-class NumberField extends TextField implements FieldInterface
+class NumberField extends TextField
 {
     /**
      * HTML type attribute.
@@ -16,5 +16,5 @@ class NumberField extends TextField implements FieldInterface
      *
      * @var array
      */
-    public $additional_html_attributes = ['placeholder', 'min', 'max'];
+    public $additional_html_attributes = ['placeholder', 'min', 'max', 'value'];
 }

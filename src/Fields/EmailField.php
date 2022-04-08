@@ -2,7 +2,7 @@
 
 namespace Ibra\MagicForms\Fields;
 
-class EmailField extends TextField implements FieldInterface
+class EmailField extends TextField
 {
     /**
      * HTML type attribute.

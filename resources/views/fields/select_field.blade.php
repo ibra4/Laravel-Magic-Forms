@@ -4,8 +4,7 @@
             {{ $attr_key }}
         @else
         {{ $attr_key }}="{{ $attr_val }}" 
-        @endif @endforeach
-        value="{{ $field->value }}">
+        @endif @endforeach>
         @foreach ($field->parameters['options'] as $value => $label)
             <option value="{{ $value }}" @if (isset($field->value) && $field->value != '' && $field->value == $value) selected @endif>{{ $label }}
             </option>

@@ -2,7 +2,7 @@
 
 namespace Ibra\MagicForms;
 
-use Ibra\MagicForms\Builder\Form\MagicForm;
+use Ibra\MagicForms\Factory\Builder\MagicForm;
 use Illuminate\Http\Request;
 
 class MagicFormDataManager

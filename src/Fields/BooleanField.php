@@ -2,7 +2,7 @@
 
 namespace Ibra\MagicForms\Fields;
 
-class BooleanField extends FieldBase implements FieldInterface
+class BooleanField extends FieldBase
 {
     /**
      * additional_html_attributes

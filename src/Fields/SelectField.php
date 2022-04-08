@@ -4,7 +4,7 @@ namespace Ibra\MagicForms\Fields;
 
 use Exception;
 
-class SelectField extends FieldBase implements FieldInterface
+class SelectField extends FieldBase
 {
     /**
      * view_name
