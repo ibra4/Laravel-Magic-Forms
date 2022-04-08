@@ -32,16 +32,9 @@ class FieldBase
     public function buildRenderable(array $options, $params = null): FieldBase
     {
         $this->buildHtmlAttributes($options, $this);
-        $this->setOptions($params);
+        $this->parameters = $params;
 
         return $this;
-    }
-
-    public function setOptions($params)
-    {
-        foreach ($params as $paramKey => $paramValue) {
-            $this->parameters[$paramKey] = $paramValue;
-        }
     }
 
     /**
