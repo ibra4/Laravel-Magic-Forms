@@ -10,4 +10,11 @@ class DateField extends FieldBase
      * @var string
      */
     public $view_name = 'date_field';
+    
+    /**
+     * additional_attributes
+     *
+     * @var array
+     */
+    public $additional_attributes = ['min', 'max', 'step', 'pattern'];
 }

@@ -45,7 +45,9 @@ class FieldBase
      */
     public function buildHtmlAttributes($options, $fieldObject)
     {
-        $this->all_html_attributes = array_merge($this->base_html_attributes, $this->additional_html_attributes);
+        $this->all_html_attributes = isset($this->additional_html_attributes) ?
+            array_merge($this->base_html_attributes, $this->additional_html_attributes)
+            : $this->base_html_attributes;
         $fieldObject->name = $options['name'];
         foreach ($options as $attr => $value) {
             $this->setHtmlAttribute($attr, $value);
