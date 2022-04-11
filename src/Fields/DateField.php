@@ -2,19 +2,12 @@
 
 namespace Ibra\MagicForms\Fields;
 
-class DateField extends FieldBase
+class DateField extends TextField
 {
     /**
-     * view_name
+     * type
      *
      * @var string
      */
-    public $view_name = 'date_field';
-    
-    /**
-     * additional_attributes
-     *
-     * @var array
-     */
-    public $additional_attributes = ['min', 'max', 'step', 'pattern'];
+    public $type = 'date';
 }
