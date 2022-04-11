@@ -46,19 +46,4 @@ class FormBuilder
     {
         return $this->makeForm($className);
     }
-
-    /**
-     * Creates a new Form Object for data managment.
-     *
-     * @param  string $className.
-     *   The Form class name.
-     * @return self
-     */
-    public function get($className)
-    {
-        /** @var \Ibra\MagicForms\Builder\Form\MagicFormInterface $form */
-        $form = new $className($this->fieldBuilder);
-        $this->form = $form->build();
-        return $this;
-    }
 }
