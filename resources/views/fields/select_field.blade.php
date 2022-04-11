@@ -6,7 +6,7 @@
         {{ $attr_key }}="{{ $attr_val }}" 
         @endif @endforeach>
         @foreach ($field->parameters['options'] as $value => $label)
-            <option value="{{ $value }}" @if (isset($field->value) && $field->value != '' && $field->value == $value) selected @endif>{{ $label }}
+            <option value="{{ $value }}" @if (old($field->name, $field->value) == $value) selected @endif>{{ $label }}
             </option>
         @endforeach
     </select>
