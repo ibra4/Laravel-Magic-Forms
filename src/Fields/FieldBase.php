@@ -4,7 +4,7 @@ namespace Ibra\MagicForms\Fields;
 
 use Exception;
 
-class FieldBase
+abstract class FieldBase
 {
 
     /**
@@ -32,7 +32,7 @@ class FieldBase
     public function buildRenderable(array $options, $params = null): FieldBase
     {
         $this->buildHtmlAttributes($options, $this);
-        $this->parameters = $params;
+        $this->buildParameters($params);
 
         return $this;
     }
@@ -88,4 +88,6 @@ class FieldBase
         $fieldView = view("magic_form::fields.$this->view_name", ['field' => $this]);
         return $fieldView;
     }
+
+    abstract function buildParameters($params);
 }

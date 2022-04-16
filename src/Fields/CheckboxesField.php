@@ -2,28 +2,21 @@
 
 namespace Ibra\MagicForms\Fields;
 
-class TextField extends FieldBase
+class CheckboxesField extends FieldBase
 {
     /**
      * view_name
      *
      * @var string
      */
-    public $view_name = 'text_field';
+    public $view_name = "checkboxes";
 
     /**
-     * HTML type attribute.
-     *
-     * @var string
-     */
-    public $type = 'text';
-
-    /**
-     * additional_html_attributes
+     * additional_attributes
      *
      * @var array
      */
-    public $additional_html_attributes = ['placeholder'];
+    public $additional_attributes = ['options'];
 
     /**
      * buildParameters

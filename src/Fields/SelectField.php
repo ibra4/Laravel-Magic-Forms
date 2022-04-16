@@ -19,4 +19,15 @@ class SelectField extends FieldBase
      * @var array
      */
     public $additional_html_attributes = ['defaultvalue'];
+
+    /**
+     * buildParameters
+     *
+     * @param  mixed $params
+     * @return void
+     */
+    public function buildParameters($params)
+    {
+        $this->parameters = $params;
+    }
 }
